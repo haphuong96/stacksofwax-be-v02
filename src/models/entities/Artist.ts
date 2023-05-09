@@ -1,4 +1,5 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, ManyToMany, PrimaryKey, Property, Collection } from '@mikro-orm/core';
+import { Album } from './Album';
 
 @Entity()
 export class Artist {
@@ -15,4 +16,6 @@ export class Artist {
   @Property({ length: 255, nullable: true, default: 'NULL' })
   imgPath?: string;
 
+  @ManyToMany({ entity: () => Album, mappedBy: 'artists'})
+  albums = new Collection<Album>(this)
 }

@@ -1,5 +1,7 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
+import { Collection, Entity, ManyToMany, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
 import { Country } from './Country';
+import { Artist } from './Artist';
+import { AlbumArtist } from './AlbumArtist';
 
 @Entity()
 export class Album {
@@ -22,4 +24,6 @@ export class Album {
   @Property({ nullable: true, defaultRaw: `current_timestamp()` })
   createdDatetime?: Date;
 
+  @ManyToMany({ entity: () => Artist, pivotEntity: () => AlbumArtist})
+  artists = new Collection<Artist>(this)
 }
