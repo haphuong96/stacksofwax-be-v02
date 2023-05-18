@@ -10,6 +10,6 @@ export class AlbumService {
     ) {}
 
     async findAll(): Promise<Album[]> {
-        return this.albumRepository.findAll();
+        return this.albumRepository.findAll({populate: ['artists']});
     }
 }

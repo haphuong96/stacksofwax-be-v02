@@ -6,7 +6,7 @@ export class Genre {
   @PrimaryKey()
   id!: number;
 
-  @Property({ length: 255, nullable: true, default: 'NULL' })
+  @Property({ length: 255, nullable: true })
   genreName?: string;
 
 }

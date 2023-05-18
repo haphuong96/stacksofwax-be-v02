@@ -7,13 +7,13 @@ export class Artist {
   @PrimaryKey()
   id!: number;
 
-  @Property({ length: 255, nullable: true, default: 'NULL' })
+  @Property({ length: 255, nullable: true })
   artistName?: string;
 
-  @Property({ columnType: 'text', length: 65535, nullable: true, default: 'NULL' })
+  @Property({ columnType: 'text', length: 65535, nullable: true})
   artistDescription?: string;
 
-  @Property({ length: 255, nullable: true, default: 'NULL' })
+  @Property({ length: 255, nullable: true })
   imgPath?: string;
 
   @ManyToMany({ entity: () => Album, mappedBy: 'artists'})

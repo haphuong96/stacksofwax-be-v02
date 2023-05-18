@@ -7,10 +7,10 @@ export class Track {
   @PrimaryKey()
   id!: number;
 
-  @Property({ length: 255, nullable: true, default: 'NULL' })
+  @Property({ length: 255, nullable: true})
   trackTitle?: string;
 
-  @Property({ length: 255, nullable: true, default: 'NULL' })
+  @Property({ length: 255, nullable: true})
   duration?: string;
 
   @ManyToOne({ entity: () => Album, nullable: true, defaultRaw: `NULL`, index: 'vinyl_id' })

@@ -10,6 +10,12 @@ export class AlbumController {
 
     @Get()
     async findAll(): Promise<Album[]> {
+        const data = await this.albumService.findAll();
+        console.log(data);
         return this.albumService.findAll();
     }
+
+    // @Get()
+    // async 
 }
+

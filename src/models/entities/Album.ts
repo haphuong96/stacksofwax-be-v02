@@ -9,13 +9,13 @@ export class Album {
   @PrimaryKey()
   id!: number;
 
-  @Property({ length: 255, nullable: true, default: 'NULL' })
+  @Property({ length: 255, nullable: true})
   albumTitle?: string;
 
-  @Property({ nullable: true, default: NaN })
-  releaseYear?: number = NaN;
+  @Property({ nullable: true })
+  releaseYear?: number;
 
-  @Property({ length: 255, nullable: true, default: 'NULL' })
+  @Property({ length: 255, nullable: true })
   imgPath?: string;
 
   @ManyToOne({ entity: () => Country, nullable: true, defaultRaw: `NULL`, index: 'country_id' })

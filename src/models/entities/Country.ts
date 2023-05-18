@@ -6,7 +6,7 @@ export class Country {
   @PrimaryKey()
   id!: number;
 
-  @Property({ length: 255, nullable: true, default: 'NULL' })
+  @Property({ length: 255, nullable: true })
   countryName?: string;
 
 }

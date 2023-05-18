@@ -12,7 +12,7 @@ export class Comment {
   @ManyToOne({ entity: () => User, nullable: true, defaultRaw: `NULL`, index: 'user_id' })
   user?: User;
 
-  @Property({ columnType: 'text', length: 65535, nullable: true, default: 'NULL' })
+  @Property({ columnType: 'text', length: 65535, nullable: true })
   comment?: string;
 
   @Property({ nullable: true, defaultRaw: `current_timestamp()` })

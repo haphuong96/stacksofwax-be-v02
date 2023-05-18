@@ -1,0 +1,1507 @@
+{
+  "namespaces": [],
+  "tables": [
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "artist_name": {
+          "name": "artist_name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "artist_description": {
+          "name": "artist_description",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 65535,
+          "mappedType": "text"
+        },
+        "img_path": {
+          "name": "img_path",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        }
+      },
+      "name": "artist",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "country_name": {
+          "name": "country_name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        }
+      },
+      "name": "country",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "album_title": {
+          "name": "album_title",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "release_year": {
+          "name": "release_year",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "integer"
+        },
+        "img_path": {
+          "name": "img_path",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "country_id": {
+          "name": "country_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "created_datetime": {
+          "name": "created_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        }
+      },
+      "name": "album",
+      "indexes": [
+        {
+          "columnNames": [
+            "country_id"
+          ],
+          "composite": false,
+          "keyName": "country_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "album_country_id_foreign": {
+          "constraintName": "album_country_id_foreign",
+          "columnNames": [
+            "country_id"
+          ],
+          "localTableName": "album",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "country",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "album_id": {
+          "name": "album_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "artist_id": {
+          "name": "artist_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        }
+      },
+      "name": "album_artist",
+      "indexes": [
+        {
+          "columnNames": [
+            "album_id"
+          ],
+          "composite": false,
+          "keyName": "album_album_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "artist_id"
+          ],
+          "composite": false,
+          "keyName": "artist_artist_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "album_id",
+          "columnNames": [
+            "album_id",
+            "artist_id"
+          ],
+          "composite": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "album_artist_album_id_foreign": {
+          "constraintName": "album_artist_album_id_foreign",
+          "columnNames": [
+            "album_id"
+          ],
+          "localTableName": "album_artist",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album",
+          "updateRule": "cascade"
+        },
+        "album_artist_artist_id_foreign": {
+          "constraintName": "album_artist_artist_id_foreign",
+          "columnNames": [
+            "artist_id"
+          ],
+          "localTableName": "album_artist",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "artist",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "genre_name": {
+          "name": "genre_name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        }
+      },
+      "name": "genre",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "album_id": {
+          "name": "album_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "genre_id": {
+          "name": "genre_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        }
+      },
+      "name": "album_genre",
+      "indexes": [
+        {
+          "columnNames": [
+            "album_id"
+          ],
+          "composite": false,
+          "keyName": "album_genre_ibfk_2",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "genre_id"
+          ],
+          "composite": false,
+          "keyName": "album_genre_ibfk_1",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "album_id_2",
+          "columnNames": [
+            "album_id",
+            "genre_id"
+          ],
+          "composite": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "album_id",
+          "columnNames": [
+            "album_id",
+            "genre_id"
+          ],
+          "composite": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "album_genre_album_id_foreign": {
+          "constraintName": "album_genre_album_id_foreign",
+          "columnNames": [
+            "album_id"
+          ],
+          "localTableName": "album_genre",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "album_genre_genre_id_foreign": {
+          "constraintName": "album_genre_genre_id_foreign",
+          "columnNames": [
+            "genre_id"
+          ],
+          "localTableName": "album_genre",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "genre",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "company_name": {
+          "name": "company_name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "string"
+        }
+      },
+      "name": "record_company",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "album_id": {
+          "name": "album_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "record_company_id": {
+          "name": "record_company_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        }
+      },
+      "name": "album_record_company",
+      "indexes": [
+        {
+          "columnNames": [
+            "album_id"
+          ],
+          "composite": false,
+          "keyName": "album_album_id_2",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "record_company_id"
+          ],
+          "composite": false,
+          "keyName": "record_company_record_company_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "album_id",
+          "columnNames": [
+            "album_id",
+            "record_company_id"
+          ],
+          "composite": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "album_record_company_album_id_foreign": {
+          "constraintName": "album_record_company_album_id_foreign",
+          "columnNames": [
+            "album_id"
+          ],
+          "localTableName": "album_record_company",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album",
+          "updateRule": "cascade"
+        },
+        "album_record_company_record_company_id_foreign": {
+          "constraintName": "album_record_company_record_company_id_foreign",
+          "columnNames": [
+            "record_company_id"
+          ],
+          "localTableName": "album_record_company",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "record_company",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "track_title": {
+          "name": "track_title",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "duration": {
+          "name": "duration",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "album_id": {
+          "name": "album_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        }
+      },
+      "name": "track",
+      "indexes": [
+        {
+          "columnNames": [
+            "album_id"
+          ],
+          "composite": false,
+          "keyName": "vinyl_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "track_album_id_foreign": {
+          "constraintName": "track_album_id_foreign",
+          "columnNames": [
+            "album_id"
+          ],
+          "localTableName": "track",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "email_address": {
+          "name": "email_address",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "password": {
+          "name": "password",
+          "type": "varbinary(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "unknown"
+        },
+        "img_path": {
+          "name": "img_path",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "created_datetime": {
+          "name": "created_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        },
+        "last_active": {
+          "name": "last_active",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        }
+      },
+      "name": "user",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "rating": {
+          "name": "rating",
+          "type": "tinyint(1)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "true",
+          "mappedType": "boolean"
+        },
+        "album_id": {
+          "name": "album_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "created_datetime": {
+          "name": "created_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        },
+        "last_updated_datetime": {
+          "name": "last_updated_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        }
+      },
+      "name": "rating_album",
+      "indexes": [
+        {
+          "columnNames": [
+            "album_id"
+          ],
+          "composite": false,
+          "keyName": "vinyl_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "user_id"
+          ],
+          "composite": false,
+          "keyName": "user_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "album_id",
+          "columnNames": [
+            "album_id",
+            "user_id"
+          ],
+          "composite": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "rating_album_album_id_foreign": {
+          "constraintName": "rating_album_album_id_foreign",
+          "columnNames": [
+            "album_id"
+          ],
+          "localTableName": "rating_album",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "rating_album_user_id_foreign": {
+          "constraintName": "rating_album_user_id_foreign",
+          "columnNames": [
+            "user_id"
+          ],
+          "localTableName": "rating_album",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "user",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "comment": {
+          "name": "comment",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 65535,
+          "mappedType": "text"
+        },
+        "created_datetime": {
+          "name": "created_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        },
+        "last_updated_datetime": {
+          "name": "last_updated_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        }
+      },
+      "name": "comment",
+      "indexes": [
+        {
+          "columnNames": [
+            "user_id"
+          ],
+          "composite": false,
+          "keyName": "user_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "comment_user_id_foreign": {
+          "constraintName": "comment_user_id_foreign",
+          "columnNames": [
+            "user_id"
+          ],
+          "localTableName": "comment",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "user",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "comment_id": {
+          "name": "comment_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "album_id": {
+          "name": "album_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        }
+      },
+      "name": "comment_album",
+      "indexes": [
+        {
+          "columnNames": [
+            "comment_id"
+          ],
+          "composite": false,
+          "keyName": "comment_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "album_id"
+          ],
+          "composite": false,
+          "keyName": "vinyl_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "comment_album_comment_id_foreign": {
+          "constraintName": "comment_album_comment_id_foreign",
+          "columnNames": [
+            "comment_id"
+          ],
+          "localTableName": "comment_album",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "comment",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "comment_album_album_id_foreign": {
+          "constraintName": "comment_album_album_id_foreign",
+          "columnNames": [
+            "album_id"
+          ],
+          "localTableName": "comment_album",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "collection_name": {
+          "name": "collection_name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "collection_desc": {
+          "name": "collection_desc",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 65535,
+          "mappedType": "text"
+        },
+        "img_path": {
+          "name": "img_path",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "last_updated_datetime": {
+          "name": "last_updated_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        },
+        "created_datetime": {
+          "name": "created_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        }
+      },
+      "name": "album_collection",
+      "indexes": [
+        {
+          "columnNames": [
+            "created_by"
+          ],
+          "composite": false,
+          "keyName": "created_by",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "album_collection_created_by_foreign": {
+          "constraintName": "album_collection_created_by_foreign",
+          "columnNames": [
+            "created_by"
+          ],
+          "localTableName": "album_collection",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "user",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "comment_id": {
+          "name": "comment_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "collection_id": {
+          "name": "collection_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        }
+      },
+      "name": "comment_collection",
+      "indexes": [
+        {
+          "columnNames": [
+            "comment_id"
+          ],
+          "composite": false,
+          "keyName": "comment_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "comment_id"
+          ],
+          "composite": false,
+          "keyName": "comment_id_2",
+          "primary": false,
+          "unique": true
+        },
+        {
+          "columnNames": [
+            "collection_id"
+          ],
+          "composite": false,
+          "keyName": "collection_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "comment_collection_comment_id_foreign": {
+          "constraintName": "comment_collection_comment_id_foreign",
+          "columnNames": [
+            "comment_id"
+          ],
+          "localTableName": "comment_collection",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "comment",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "comment_collection_collection_id_foreign": {
+          "constraintName": "comment_collection_collection_id_foreign",
+          "columnNames": [
+            "collection_id"
+          ],
+          "localTableName": "comment_collection",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album_collection",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "collection_id": {
+          "name": "collection_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "created_datetime": {
+          "name": "created_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        }
+      },
+      "name": "collection_like",
+      "indexes": [
+        {
+          "columnNames": [
+            "user_id"
+          ],
+          "composite": false,
+          "keyName": "user_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "collection_id"
+          ],
+          "composite": false,
+          "keyName": "collection_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "user_id_2",
+          "columnNames": [
+            "user_id",
+            "collection_id"
+          ],
+          "composite": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "collection_like_user_id_foreign": {
+          "constraintName": "collection_like_user_id_foreign",
+          "columnNames": [
+            "user_id"
+          ],
+          "localTableName": "collection_like",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "user",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "collection_like_collection_id_foreign": {
+          "constraintName": "collection_like_collection_id_foreign",
+          "columnNames": [
+            "collection_id"
+          ],
+          "localTableName": "collection_like",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album_collection",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "album_id": {
+          "name": "album_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "album_collection_id": {
+          "name": "album_collection_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "NULL",
+          "mappedType": "integer"
+        },
+        "created_datetime": {
+          "name": "created_datetime",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 0,
+          "default": "current_timestamp()",
+          "mappedType": "datetime"
+        }
+      },
+      "name": "album_album_collection",
+      "indexes": [
+        {
+          "columnNames": [
+            "album_id"
+          ],
+          "composite": false,
+          "keyName": "vinyl_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "album_collection_id"
+          ],
+          "composite": false,
+          "keyName": "vinyl_collection_id",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "album_id",
+          "columnNames": [
+            "album_id",
+            "album_collection_id"
+          ],
+          "composite": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "album_album_collection_album_id_foreign": {
+          "constraintName": "album_album_collection_album_id_foreign",
+          "columnNames": [
+            "album_id"
+          ],
+          "localTableName": "album_album_collection",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "album_album_collection_album_collection_id_foreign": {
+          "constraintName": "album_album_collection_album_collection_id_foreign",
+          "columnNames": [
+            "album_collection_id"
+          ],
+          "localTableName": "album_album_collection",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "album_collection",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        }
+      }
+    }
+  ]
+}
